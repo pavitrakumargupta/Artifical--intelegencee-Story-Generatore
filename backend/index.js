@@ -1,25 +1,24 @@
 const express=require("express")
-const cors = require('cors');
-const port = 3000
+const cors =require("cors")
 const mongoose = require('mongoose');
 const Story = require('./models/story-model');
+const app=express()
 
+const DB = `mongodb+srv://pilik56896:pilik56896@cluster0.x900tqm.mongodb.net/storiesDb`
 
-mongoose.connect('mongodb+srv://pilik56896:pilik56896@cluster0.x900tqm.mongodb.net/storiesDb', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
+mongoose
+   .connect(DB, {
+     useNewUrlParser: true,
+     useUnifiedTopology: true,
+   })
+   .then(() => {
+     console.log('DB connection suceesfull!');
+   }).catch((err)=>{
+    console.log("error ocurred",err.message);
+   })
 
-
-const app = express()
 app.use(cors())  
 app.use(express.json()) 
-
-
-
-// Define a route to save a story
 app.post('/api/setStories', async (req, res) => {
     console.log(req.body);
     try {
@@ -55,8 +54,10 @@ app.get('/api/getStories', async (req, res) => {
         res.status(500).json({ message: 'Error fetching stories' });
     }
 });
+app.get('/', function(req, res){
+    res.send('Running the On-Campus server app');
+  });
 
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+const server=app.listen(process.env.PORT ||5000,()=>{
+    console.log('server is listening on',process.env.PORT); 
+})     

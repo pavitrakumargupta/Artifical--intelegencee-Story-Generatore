@@ -5,7 +5,7 @@ const AllStories = () => {
   const [stories, setStories] = useState([]);
   useEffect(() => {
     (async () => {
-      const response = await axios("http://localhost:3000/api/getStories");
+      const response = await axios("http://ai-story-generator-three.vercel.app/api/getStories");
       console.log(response.data);
       setStories(response.data);
     })();
