@@ -14,8 +14,8 @@ mongoose.connect('mongodb+srv://pilik56896:pilik56896@cluster0.x900tqm.mongodb.n
 
 
 const app = express()
-app.use(cors());
-app.use(express.json());
+app.use(cors())  
+app.use(express.json()) 
 
 
 
