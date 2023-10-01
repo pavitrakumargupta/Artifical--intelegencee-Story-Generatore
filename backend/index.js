@@ -1,12 +1,9 @@
-const express = require('express')
-const app = express()
+const express=require("express")
 const cors = require('cors');
 const port = 3000
 const mongoose = require('mongoose');
 const Story = require('./models/story-model');
 
-app.use(cors());
-app.use(express.json());
 
 mongoose.connect('mongodb+srv://pilik56896:pilik56896@cluster0.x900tqm.mongodb.net/storiesDb', {
     useNewUrlParser: true,
@@ -14,6 +11,12 @@ mongoose.connect('mongodb+srv://pilik56896:pilik56896@cluster0.x900tqm.mongodb.n
 })
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
+
+const app = express()
+app.use(cors());
+app.use(express.json());
+
 
 
 // Define a route to save a story
